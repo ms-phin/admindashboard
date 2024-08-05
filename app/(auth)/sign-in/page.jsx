@@ -64,12 +64,12 @@ export default function SignIn() {
                 </Button>
               </form>
 
-              <p className=" flex items-center justify-center text-center">
-                Haven't an account?{" "}
+              <p className="flex items-center justify-center text-center">
+                Haven&apos;t an account?{" "}
                 <Link href="/sign-up">
-                  <p className="text-[#00ABFF] font-family:Roboto font-size:16px font-weight:400 line-height:24px text-align:center ml-2">
+                  <a className="text-[#00ABFF] font-family:Roboto font-size:16px font-weight:400 line-height:24px text-align:center ml-2">
                     Sign Up
-                  </p>
+                  </a>
                 </Link>
               </p>
             </div>
