@@ -11,21 +11,21 @@ export default function SignIn() {
     <main className="h-screen w-full">
       <div className="grid lg:grid-cols-4 h-full overflow-hidden">
         {/* Right Section */}
-        <div className="col-span-4 lg:col-span-2 overflow-y-auto bg-white">
+        <div className="col-span-4 lg:col-span-2 overflow-y-auto bg-white p-16">
           <div className="text-black h-full w-full flex items-center justify-center">
             <div className="my-4 w-full space-y-3 max-w-[730px] gap-5 mx-auto p-6">
               <div className="flex gap-4">
                 <LogoLoginIcon />
-                <h1 className="text-3xl font-semibold">Book Rent</h1>
+                <h1 className="text-2xl font-semibold ">Book Rent</h1>
               </div>
-              <h5 className="text-2xl font-normal leading-8 text-left py-2">
+              <h5 className="text-base font-normal leading-8 text-left py-2">
                 Login into Book Rent
               </h5>
 
               <form>
                 <Label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-xs font-medium text-gray-700"
                 >
                   Email
                 </Label>
@@ -37,7 +37,7 @@ export default function SignIn() {
                 />
                 <Label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-xs font-medium text-gray-700"
                 >
                   Password
                 </Label>
