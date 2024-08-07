@@ -39,7 +39,7 @@ export const sidebarBottomLinks = [
   },
   {
     imgURL: "/icons/Login.png",
-    route: "/login",
+    route: "/sign-in",
     label: "Login as Book Owner",
   },
 ];
