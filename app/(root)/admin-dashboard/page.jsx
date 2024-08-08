@@ -1,5 +1,19 @@
-const page = () => {
-  return <div>DashBoard</div>;
+const AdminDashboard = () => {
+  return (
+    <section className="relative flex flex-col">
+      <div className="bg-white rounded-[20px] p-3">
+        <h1 className="text-20  font-blod ml-[49px]">Owner/DashBoard</h1>
+      </div>
+      <div className=" flex  h-[calc(100vh-35px)] mt-[15px] gap-4">
+        <div className="flex flex-col w-full max-w-[318px] h-full bg-white rounded-[14px] ">
+          {" "}
+          left part
+        </div>
+        <div className="flex flex-col w-full h-full bg-white rounded-[14px]">
+          rghit part
+        </div>
+      </div>
+    </section>
+  );
 };
-
-export default page;
+export default AdminDashboard;

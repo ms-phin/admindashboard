@@ -5,8 +5,12 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import LogoLoginIcon from "../../components/LogoLoginIncon";
 import Link from "next/link";
+import { fetchUsers } from "@/app/api/data";
+import { addUser } from "@/app/api/actions";
 
-export default function SignUp() {
+export default async function SignUp() {
+  const users = await fetchUsers();
+
   return (
     <main className="h-screen w-full">
       <div className="grid lg:grid-cols-4 h-full overflow-hidden">
@@ -23,7 +27,7 @@ export default function SignUp() {
                 Singup as Owner
               </h5>
 
-              <form>
+              <form action={addUser}>
                 <Label
                   htmlFor="email"
                   className="block text-xs font-medium text-gray-700"
@@ -34,6 +38,7 @@ export default function SignUp() {
                   className="mt-[2px] mb-[2px] bg-transparent block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   type="email"
                   id="email"
+                  name="email"
                   placeholder="Email"
                 />
                 <Label
@@ -46,6 +51,7 @@ export default function SignUp() {
                   className="mt-[2px] mb-[2px] bg-transparent block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   type="password"
                   id="password"
+                  name="password"
                   placeholder="Password"
                 />
                 <Label
@@ -58,6 +64,7 @@ export default function SignUp() {
                   className="mt-[2px] mb-[2px] bg-transparent block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   type="password"
                   id="confirm_password"
+                  name="confirm_password"
                   placeholder="Confirm Password"
                 />
                 <Label
@@ -70,6 +77,7 @@ export default function SignUp() {
                   className="mt-[2px] mb-[2px] bg-transparent block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   type="text"
                   id="location"
+                  name="location"
                   placeholder="Location"
                 />
                 <Label
@@ -82,10 +90,11 @@ export default function SignUp() {
                   className="mt-[2px] mb-[2px] bg-transparent block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   type="tel"
                   id="phone_number"
+                  name="phone"
                   placeholder="Phone Number"
                 />
                 <div className="flex items-center space-x-2 pt-2 pb-2">
-                  <Checkbox id="terms" />
+                  <Checkbox id="terms" name="terms" />
                   <label
                     htmlFor="terms"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -97,7 +106,7 @@ export default function SignUp() {
                   type="submit"
                   className="w-full mt-2 bg-[#00ABFF] text-white py-2 px-4 rounded-md hover:bg-blue-700"
                 >
-                  signup
+                  Signup
                 </Button>
               </form>
 

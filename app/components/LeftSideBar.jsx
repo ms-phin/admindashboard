@@ -1,5 +1,5 @@
 "use client";
-import { sidebarLinks } from "@/constants";
+import { loginOptionLink, sidebarLinks } from "@/constants";
 import { sidebarBottomLinks } from "@/constants";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -8,9 +8,12 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 
 import { usePathname, useRouter } from "next/navigation";
+// import { fetchUsers } from "../api/data";
 
-const LeftSideBar = () => {
+const LeftSideBar = async ({ isAdmin }) => {
   const pathname = usePathname();
+  // const users = await fetchUsers();
+  // console.log(users.isActive);
   //   const router = useRouter();
   return (
     <section className="left_sidebar  h-[calc(100vh-20px)] rounded-l-lg ">
@@ -40,7 +43,6 @@ const LeftSideBar = () => {
           </Link>
         </div>
         <div className="w-[230px]  ml-[24px] mb-[10px] border-t border-white border-opacity-80"></div>
-
         {sidebarLinks.map(({ label, route, imgURL }) => {
           const isActive =
             pathname === route || pathname.startsWith(`${route}/`);
@@ -84,6 +86,7 @@ const LeftSideBar = () => {
             </Link>
           );
         })}
+
         <div className="w-[230px]  ml-[24px] border-t border-white border-opacity-80"></div>
       </nav>
       <div className="flex items-center justify-center w-[230px] h-[48px] ml-4 mb-5 bg-gray-600  rounded-[15px] ">
