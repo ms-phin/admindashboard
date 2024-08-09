@@ -5,6 +5,7 @@ import { User } from "./models";
 import { connectToDB } from "./utils";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
+import { signIn } from "../auth";
 
 export const addUser = async (formData) => {
   const { email, password, confirm_password, location, phone, isAdmin } =
@@ -46,4 +47,17 @@ export const addUser = async (formData) => {
 
   revalidatePath("/admin-dashboard/");
   redirect("/admin-dashboard/");
+};
+
+export const authenticate = async (formData) => {
+  const { email, password } = Object.fromEntries(formData);
+
+  try {
+    await signIn("credentials", { email, password });
+  } catch (err) {
+    if (err.message.includes("CredentialsSignin")) {
+      return "Wrong Credentials";
+    }
+    throw err;
+  }
 };

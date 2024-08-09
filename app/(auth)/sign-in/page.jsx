@@ -1,3 +1,5 @@
+"use client";
+
 import LogoIcon from "../../components/LogoIcon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -5,8 +7,13 @@ import { Label } from "@/components/ui/label";
 import LogoLoginIcon from "../../components/LogoLoginIncon";
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
+import { authenticate } from "@/app/api/actions";
+// import { useFormState } from "react-dom";
 
 export default function SignIn() {
+  // const { formAction } = useFormState(authenticate, undefined);
+  // console.log(formAction);
+
   return (
     <main className="h-screen w-full">
       <div className="grid lg:grid-cols-4 h-full overflow-hidden">
@@ -22,7 +29,7 @@ export default function SignIn() {
                 Login into Book Rent
               </h5>
 
-              <form>
+              <form action={authenticate}>
                 <Label
                   htmlFor="email"
                   className="block text-xs font-medium text-gray-700"
@@ -33,6 +40,7 @@ export default function SignIn() {
                   className="mt-2 mb-2 bg-transparent block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   type="email"
                   id="email"
+                  name="email"
                   placeholder="Email"
                 />
                 <Label
@@ -45,6 +53,7 @@ export default function SignIn() {
                   className="mt-2 mb-2 bg-transparent block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   type="password"
                   id="password"
+                  name="password"
                   placeholder="Password"
                 />
                 <div className="flex items-center space-x-2 pt-2 pb-2">

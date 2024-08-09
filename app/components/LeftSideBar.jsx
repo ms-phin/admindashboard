@@ -4,19 +4,21 @@ import { sidebarBottomLinks } from "@/constants";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
-import { usePathname, useRouter } from "next/navigation";
-// import { fetchUsers } from "../api/data";
+import { usePathname } from "next/navigation";
+import { handleSignOut } from "@/helper/authActions";
 
-const LeftSideBar = async ({ isAdmin }) => {
+const LeftSideBar = ({ user }) => {
   const pathname = usePathname();
-  // const users = await fetchUsers();
-  // console.log(users.isActive);
-  //   const router = useRouter();
+  console.log(user);
+  useEffect(() => {
+    console.log("Static User:", { name: "Test User", id: "123" }); // Test with static data
+  }, []);
+
   return (
-    <section className="left_sidebar  h-[calc(100vh-20px)] rounded-l-lg ">
+    <section className="left_sidebar  h-[calc(100vh-20px)]  ">
       <nav className="flex flex-col ">
         <div className=" flex items-center ml-[21px] mt-[21px] gap-[15px]">
           <Image
@@ -114,12 +116,14 @@ const LeftSideBar = async ({ isAdmin }) => {
           />
         </div>
         <div className="ml-0">
-          <Button
-            className="text-[18px] font-[500]"
-            // onClick={() => signOut(() => router.push("/"))}
-          >
-            Logout
-          </Button>
+          <form action={handleSignOut}>
+            <Button
+              className="text-[18px] font-[500]"
+              // onClick={() => signOut(() => router.push("/"))}
+            >
+              Logout
+            </Button>
+          </form>
         </div>
       </div>
     </section>

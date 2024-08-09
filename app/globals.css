@@ -14,7 +14,7 @@
   }
 
   .left_sidebar {
-    @apply sticky left-0 top-0 flex w-[279px] flex-col justify-between bg-[#171B36] text-white max-md:hidden lg:w-[279px] rounded-xl border-none;
+    @apply sticky left-0 top-0 flex w-[279px] flex-col justify-between bg-[#171B36] text-white max-md:hidden lg:w-[279px] rounded-[25px];
   }
 
   .image_div {
