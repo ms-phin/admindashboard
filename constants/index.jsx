@@ -6,22 +6,22 @@ export const sidebarLinks = [
   },
   {
     imgURL: "/icons/Book.png",
-    route: "/books",
+    route: "/admin-dashboard/books",
     label: "Books",
   },
   {
     imgURL: "/icons/Person.png",
-    route: "/owners",
+    route: "/admin-dashboard/owners",
     label: "Owners",
   },
   {
     imgURL: "/icons/Other.png",
-    route: "/other",
+    route: "/admin-dashboard/other",
     label: "Other",
   },
   {
     imgURL: "/icons/Other.png",
-    route: "/other",
+    route: "/admin-dashboard/other",
     label: "Other",
   },
 ];
@@ -29,14 +29,17 @@ export const sidebarLinks = [
 export const sidebarBottomLinks = [
   {
     imgURL: "/icons/Notification.png",
-    route: "/notification",
+    route: "/admin-dashboard/notification",
     label: "Notification",
   },
   {
     imgURL: "/icons/Setting.png",
-    route: "/setting",
+    route: "/admin-dashboard/setting",
     label: "Setting",
   },
+];
+
+export const loginOptionLink = [
   {
     imgURL: "/icons/Login.png",
     route: "/sign-in",

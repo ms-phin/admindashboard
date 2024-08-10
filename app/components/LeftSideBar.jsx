@@ -1,21 +1,27 @@
-"use client";
+// "use client";
 import { loginOptionLink, sidebarLinks } from "@/constants";
 import { sidebarBottomLinks } from "@/constants";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
+import MenuLink from "./menuLink/SideLinkMenu";
+import { auth } from "@/app/auth";
 
-import { usePathname } from "next/navigation";
 import { handleSignOut } from "@/helper/authActions";
 
-const LeftSideBar = ({ user }) => {
-  const pathname = usePathname();
-  console.log(user);
-  useEffect(() => {
-    console.log("Static User:", { name: "Test User", id: "123" }); // Test with static data
-  }, []);
+const LeftSideBar = async () => {
+  // const { user } = await auth();
+  const authResult = await auth();
+  const user = authResult?.user || null;
+
+  const isAdmin = user?.isAdmin;
+  const hasUser = !!user;
+
+  const adjustedLoginOptionLink = loginOptionLink.map((link) => ({
+    ...link,
+    label: isAdmin ? "Login as Book Owner" : "Login as Admin",
+  }));
 
   return (
     <section className="left_sidebar  h-[calc(100vh-20px)]  ">
@@ -46,86 +52,60 @@ const LeftSideBar = ({ user }) => {
         </div>
         <div className="w-[230px]  ml-[24px] mb-[10px] border-t border-white border-opacity-80"></div>
         {sidebarLinks.map(({ label, route, imgURL }) => {
-          const isActive =
-            pathname === route || pathname.startsWith(`${route}/`);
           return (
-            <Link
-              href={route}
-              key={label}
-              className={cn(
-                "flex gap-3 items-center p-[10px]   max-lg:px-4 justify-center lg:justify-start lg:ml-[24px] ",
-                {
-                  "bg-[#00ABFF] w-[230px] h-[44px] rounded-[5px] ": isActive,
-                }
-              )}
-            >
-              <Image src={imgURL} alt={label} width={20} height={18} />
-              <p className="font-inter text-sm font-medium leading-[16.94px] text-left">
-                {label}
-              </p>
-            </Link>
+            <MenuLink label={label} route={route} imgURL={imgURL} key={label} />
           );
         })}
         <div className="w-[230px]  ml-[24px] border-t border-white border-opacity-80"></div>
         {sidebarBottomLinks.map(({ label, route, imgURL }) => {
-          const isActive =
-            pathname === route || pathname.startsWith(`${route}/`);
           return (
-            <Link
-              href={route}
-              key={label}
-              className={cn(
-                "flex gap-3 items-center p-[10px]  max-lg:px-4 justify-center lg:justify-start lg:ml-[24px]",
-                {
-                  "bg-[#00ABFF] w-[230px] h-[44px] rounded-[5px] ": isActive,
-                }
-              )}
-            >
-              <Image src={imgURL} alt={label} width={20} height={18} />
-              <p className="font-inter text-sm font-medium leading-[16.94px] text-left">
-                {label}
-              </p>
-            </Link>
+            <MenuLink label={label} route={route} imgURL={imgURL} key={label} />
           );
         })}
+        {adjustedLoginOptionLink.map(({ label, route, imgURL }) => (
+          <MenuLink
+            label={label}
+            route={route}
+            imgURL={imgURL}
+            key={label}
+            isUser={hasUser}
+          />
+        ))}
 
-        <div className="w-[230px]  ml-[24px] border-t border-white border-opacity-80"></div>
+        <div className="w-[230px] mt-[10px]   ml-[24px] border-t border-white border-opacity-80"></div>
       </nav>
-      <div className="flex items-center justify-center w-[230px] h-[48px] ml-4 mb-5 bg-gray-600  rounded-[15px] ">
-        <div className="flex items-center w-[20px] h-[20px]  ">
-          <Image
-            src="/icons/Line.png"
-            alt="line"
-            width={8}
-            height={2}
-            className=""
-          />
-          <Image
-            src="/icons/Arrow.png"
-            alt="arrow"
-            width={6}
-            height={10}
-            className=""
-          />{" "}
-          <Image
-            src="/icons/Bracket.png"
-            alt="bracket"
-            width={6}
-            height={15}
-            className="left-[3px] "
-          />
+      {hasUser && (
+        <div className="flex items-center justify-center w-[230px] h-[48px] ml-4 mb-5 bg-gray-600  rounded-[15px] ">
+          <div className="flex items-center w-[20px] h-[20px]  ">
+            <Image
+              src="/icons/Line.png"
+              alt="line"
+              width={8}
+              height={2}
+              className=""
+            />
+            <Image
+              src="/icons/Arrow.png"
+              alt="arrow"
+              width={6}
+              height={10}
+              className=""
+            />{" "}
+            <Image
+              src="/icons/Bracket.png"
+              alt="bracket"
+              width={6}
+              height={15}
+              className="left-[3px] "
+            />
+          </div>
+          <div className="ml-0">
+            <form action={handleSignOut}>
+              <Button className="text-[18px] font-[500]">Logout</Button>
+            </form>
+          </div>
         </div>
-        <div className="ml-0">
-          <form action={handleSignOut}>
-            <Button
-              className="text-[18px] font-[500]"
-              // onClick={() => signOut(() => router.push("/"))}
-            >
-              Logout
-            </Button>
-          </form>
-        </div>
-      </div>
+      )}
     </section>
   );
 };

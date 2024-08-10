@@ -10,7 +10,7 @@
 
 @layer utilities {
   .input-class {
-    @apply text-16 placeholder:text-16 bg-[#262725]  rounded-[6px] placeholder:text-gray-1 border-none text-gray-1;
+    @apply text-16 placeholder:text-16 bg-[#262725]  rounded-[6px] placeholder:text-gray-300 border-none text-gray-200;
   }
 
   .left_sidebar {
@@ -18,7 +18,7 @@
   }
 
   .image_div {
-    @apply flex-center mt-5 h-[142px] w-full cursor-pointer flex-col gap-3 rounded-xl border-[3.2px] border-dashed border-black-6 bg-[#262725];
+    @apply flex-center  mt-5 h-[72px] w-[250px] cursor-pointer flex-col gap-3 rounded-xl border-[3.2px];
   }
 
   .button_bold-16 {

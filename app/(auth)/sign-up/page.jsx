@@ -5,11 +5,11 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import LogoLoginIcon from "../../components/LogoLoginIncon";
 import Link from "next/link";
-import { fetchUsers } from "@/app/api/data";
+// import { fetchUsers } from "@/app/api/data";
 import { addUser } from "@/app/api/actions";
 
 export default async function SignUp() {
-  const users = await fetchUsers();
+  // const users = await fetchUsers();
 
   return (
     <main className="h-screen w-full">
