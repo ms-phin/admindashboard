@@ -2,11 +2,6 @@ import { connectToDB } from "../utils";
 import { Book } from "../models";
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
-export const config = {
-  api: {
-    bodyParser: true, // Enable or disable body parsing
-  },
-};
 
 export async function GET(request) {
   try {
@@ -31,12 +26,7 @@ export async function POST(request) {
     console.log("Connected to the database");
 
     const formData = await request.formData();
-    // console.log("Received form data:", formData);
-
-    // const title = formData.get("title");
-    // console.log(title);
     const image = formData.get("image");
-    // console.log(image);
     if (!image) {
       console.error("No image found in form data");
       return NextResponse.json({ success: false, msg: "No image selected" });
