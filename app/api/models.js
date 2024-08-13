@@ -29,4 +29,35 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+const bookSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    imageUrl: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+export const Book = mongoose.models.Book || mongoose.model("Book", bookSchema);
 export const User = mongoose.models.User || mongoose.model("User", userSchema);

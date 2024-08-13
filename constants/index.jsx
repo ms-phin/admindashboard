@@ -21,8 +21,8 @@ export const sidebarLinks = [
   },
   {
     imgURL: "/icons/Other.png",
-    route: "/admin-dashboard/other",
-    label: "Other",
+    route: "/admin-dashboard/othe",
+    label: "Othe",
   },
 ];
 

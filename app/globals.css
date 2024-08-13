@@ -7,7 +7,31 @@
 *::after {
   box-sizing: border-box;
 }
-
+.swal2-right {
+  right: 0 !important;
+  margin-right: 20px;
+  top: 20% !important;
+  transform: translateY(-50%);
+  transition: right 0.5s ease, transform 0.5s ease;
+}
+/* .swal2-title-custom {
+  font-size: 24px;
+  color:gray;
+  font-weight:;
+  text-align: center;
+} */
+.select-content-up {
+  position: absolute;
+  top: 100%; /* Adjust based on your design */
+  left: 0;
+  z-index: 1;
+}
+.swal2-content-custom {
+  font-size: 16px;
+  color: #949191;
+  font-weight: 300;
+  text-align: center;
+}
 @layer utilities {
   .input-class {
     @apply text-16 placeholder:text-16 bg-[#262725]  rounded-[6px] placeholder:text-gray-300 border-none text-gray-200;
@@ -18,7 +42,7 @@
   }
 
   .image_div {
-    @apply flex-center  mt-5 h-[72px] w-[250px] cursor-pointer flex-col gap-3 rounded-xl border-[3.2px];
+    @apply flex-center   h-[74px] w-[371px] cursor-pointer flex-col gap-3 rounded-xl;
   }
 
   .button_bold-16 {
