@@ -25,6 +25,12 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    book: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Book",
+      },
+    ],
   },
   { timestamps: true }
 );
@@ -54,6 +60,10 @@ const bookSchema = new mongoose.Schema(
     imageUrl: {
       type: String,
       required: true,
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true }

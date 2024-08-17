@@ -14,12 +14,19 @@
   transform: translateY(-50%);
   transition: right 0.5s ease, transform 0.5s ease;
 }
-/* .swal2-title-custom {
-  font-size: 24px;
-  color:gray;
-  font-weight:;
-  text-align: center;
-} */
+/* In your global CSS file or Tailwind CSS configuration */
+
+.modal:not(dialog:not(.modal-open)),
+.modal::backdrop {
+  background-color: transparent;
+  animation: modal-pop 0.2s ease-out;
+}
+.modal:not(dialog:not(.modal-open)),
+.modal::backdrop {
+  background-color: transparent;
+  animation: modal-pop 0.2s ease-out;
+}
+
 .select-content-up {
   position: absolute;
   top: 100%; /* Adjust based on your design */
@@ -71,5 +78,8 @@
   }
   .text-32 {
     @apply text-[32px] leading-normal;
+  }
+  .my-theme-container {
+    @apply bg-white;
   }
 }

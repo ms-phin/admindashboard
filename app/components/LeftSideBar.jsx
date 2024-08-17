@@ -1,4 +1,3 @@
-// "use client";
 import { loginOptionLink, sidebarLinks } from "@/constants";
 import { sidebarBottomLinks } from "@/constants";
 import Image from "next/image";
