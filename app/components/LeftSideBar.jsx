@@ -1,4 +1,9 @@
-import { loginOptionLink, sidebarLinks } from "@/constants";
+import {
+  loginOptionLink,
+  sidebarLinks,
+  SideBookLinkUpload,
+  SideBookLink,
+} from "@/constants";
 import { sidebarBottomLinks } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +20,7 @@ const LeftSideBar = async () => {
   const user = authResult?.user || null;
 
   const isAdmin = user?.isAdmin;
+  console.log(isAdmin);
   const hasUser = !!user;
 
   const adjustedLoginOptionLink = loginOptionLink.map((link) => ({
@@ -55,6 +61,24 @@ const LeftSideBar = async () => {
             <MenuLink label={label} route={route} imgURL={imgURL} key={label} />
           );
         })}
+        {isAdmin
+          ? SideBookLink.map(({ label, route, imgURL }) => (
+              <MenuLink
+                label={label}
+                route={route}
+                imgURL={imgURL}
+                key={label}
+              />
+            ))
+          : SideBookLinkUpload.map(({ label, route, imgURL }) => (
+              <MenuLink
+                label={label}
+                route={route}
+                imgURL={imgURL}
+                key={label}
+              />
+            ))}
+
         <div className="w-[230px]  ml-[24px] border-t border-white border-opacity-80"></div>
         {sidebarBottomLinks.map(({ label, route, imgURL }) => {
           return (

@@ -51,6 +51,7 @@ export const addUser = async (formData) => {
 
 export const authenticate = async (formData) => {
   const { email, password } = Object.fromEntries(formData);
+  console.log("trying to down ", email);
 
   try {
     await signIn("credentials", { email, password });

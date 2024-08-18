@@ -1,14 +1,25 @@
+export const SideBookLink = [
+  {
+    imgURL: "/icons/Book.png",
+    route: "/admin-dashboard/books",
+    label: "Books",
+  },
+];
+export const SideBookLinkUpload = [
+  {
+    imgURL: "/icons/Book.png",
+    route: "/admin-dashboard/books",
+    label: "Upload Book",
+  },
+];
+
 export const sidebarLinks = [
   {
     imgURL: "/icons/Logo.png",
     route: "/admin-dashboard",
     label: "Dashborad",
   },
-  {
-    imgURL: "/icons/Book.png",
-    route: "/admin-dashboard/books",
-    label: "Books",
-  },
+
   {
     imgURL: "/icons/Person.png",
     route: "/admin-dashboard/owners",
@@ -22,7 +33,7 @@ export const sidebarLinks = [
   {
     imgURL: "/icons/Other.png",
     route: "/admin-dashboard/othe",
-    label: "Othe",
+    label: "Other",
   },
 ];
 

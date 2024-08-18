@@ -1,150 +1,3 @@
-// "use client";
-// import Image from "next/image";
-// import { useState, useEffect } from "react";
-// import axios from "axios";
-// import { FaTrash } from "react-icons/fa";
-// import { IoEyeSharp } from "react-icons/io5";
-// // import Model from "./Model";
-
-// const User = ({ hasUser }) => {
-//   const [data, setData] = useState([]);
-//   const [openModelDelete, setOpenModelDelete] = useState(false);
-//   //   console.log(data);
-
-//   const getUsers = async () => {
-//     try {
-//       const response = await axios.get("/api/users");
-//       setData(response.data.users);
-//     } catch (error) {
-//       console.error("Error fetching users:", error);
-//     }
-//   };
-
-//   const updateUserStatus = async (email, newStatus) => {
-//     try {
-//       const response = await axios.put("/api/users", {
-//         email,
-//         isActive: newStatus,
-//       });
-//       if (response.data.success) {
-//         // Update the local state
-//         setData((prevData) =>
-//           prevData.map((user) =>
-//             user.email === email ? { ...user, isActive: newStatus } : user
-//           )
-//         );
-//       } else {
-//         console.error("Error updating user:", response.data.msg);
-//       }
-//     } catch (error) {
-//       console.error("Error updating user:", error);
-//     }
-//   };
-
-//   const handleDeleteTask = async (id) => {
-//     try {
-//       const response = await axios.delete(`/api/users/${id}`);
-//       if (response.data.success) {
-//         setData((prevData) => prevData.filter((user) => user._id !== _id));
-//         setOpenModelDelete(false);
-//       } else {
-//         console.error("Error deleting user:", response.data.msg);
-//       }
-//     } catch (error) {
-//       console.error("Error deleting user:", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     getUsers();
-//   }, []);
-
-//   return (
-//     <section className="relative flex flex-col overflow-scroll">
-//       <div className="sticky top-0 bg-white rounded-[20px] p-3">
-//         <h1 className="text-20 font-semibold ml-[49px]">Owner/Book Upload</h1>
-//       </div>
-//       <div className="flex h-[calc(100vh-35px)] mt-[15px] gap-4">
-//         <div className="flex flex-col w-full h-full bg-white rounded-[14px]">
-//           <div className="bg-white p-5 rounded-lg">
-//             <h2 className="mb-5 font-bold">List of Owners</h2>
-//             <table className="w-full border-collapse">
-//               <thead>
-//                 <tr className="text-gray-400 font-medium text-sm">
-//                   <th className="px-4 py-2 text-left">No.</th>
-//                   <th className="px-4 py-2 text-left">Owner</th>
-//                   <th className="px-4 py-2 text-left">Upload</th>
-//                   <th className="px-4 py-2 text-left">Location</th>
-//                   <th className="px-4 py-2 text-left">Status</th>
-//                   <th className="px-4 py-2 text-left">Action</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {data.map((user, index) => (
-//                   <tr key={user.email} className="border-b border-gray-200">
-//                     <td className="px-4 py-2 text-gray-400">{index + 1}</td>
-//                     <td className="px-4 py-2">{user.email}</td>
-//                     <td className="px-4 py-2 text-gray-400">
-//                       {user.book ? user.book.length : 0}
-//                     </td>
-//                     <td className="px-4 py-2 text-gray-400">{user.location}</td>
-//                     <td className="px-4 py-2">
-//                       <label
-//                         htmlFor={`check-${index}`}
-//                         className={` cursor-pointer relative w-12 h-3 rounded-full inline-block
-//                           ${user.isActive ? "bg-green-400" : "bg-gray-300"}`}
-//                       >
-//                         <input
-//                           type="checkbox"
-//                           id={`check-${index}`}
-//                           className="sr-only peer"
-//                           checked={user.isActive}
-//                           onChange={() =>
-//                             updateUserStatus(user.email, !user.isActive)
-//                           }
-//                         />
-//                         <span className="w-5 h-5 bg-gray-400 absolute rounded-full  top-[-3px] peer-checked:bg-green-600 peer-checked:left-8 transition-all duration-500"></span>
-//                       </label>
-//                     </td>
-//                     {hasUser && (
-//                       <td className="flex ml-3 mt-3 gap-5">
-//                         <IoEyeSharp className="" width={20} />
-//                         <FaTrash
-//                           className="text-red-600 cursor-pointer"
-//                           width={20}
-//                           onClick={() => setOpenModelDelete(true)}
-//                         />
-//                         {/* <Model
-//                           modelOpen={openModelDelete}
-//                           setModelOpen={setOpenModelDelete}
-//                         >
-//                           <h3 className="text-lg">
-//                             {" "}
-//                             Are you sure, you want to delete thsi tasks?{" "}
-//                           </h3>
-//                           <div className="model-action">
-//                             <button
-//                               onClick={() => handleDeleteTask(user._id)}
-//                               className="btn"
-//                             >
-//                               yes
-//                             </button>
-//                           </div>
-//                         </Model> */}
-//                       </td>
-//                     )}
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default User;
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -153,7 +6,7 @@ import { FaTrash } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
 import Model from "./Model";
 
-const User = ({ hasUser }) => {
+const User = ({ isAdmin }) => {
   const [data, setData] = useState([]);
   const [openModelDelete, setOpenModelDelete] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
@@ -255,7 +108,7 @@ const User = ({ hasUser }) => {
                         <span className="w-5 h-5 bg-gray-400 absolute rounded-full top-[-3px] peer-checked:bg-green-600 peer-checked:left-8 transition-all duration-500"></span>
                       </label>
                     </td>
-                    {hasUser && (
+                    {isAdmin && (
                       <td className="flex ml-3 mt-3 gap-5">
                         <IoEyeSharp className="" width={20} />
                         <FaTrash

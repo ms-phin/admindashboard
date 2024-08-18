@@ -11,7 +11,7 @@ const page = async () => {
 
   return (
     <div className="h-full  w-full">
-      <Owners hasUser={hasUser} />
+      <Owners isAdmin={isAdmin} />
     </div>
   );
 };

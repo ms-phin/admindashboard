@@ -5,12 +5,15 @@ import { connectToDB } from "./api/utils";
 import { User } from "./api/models";
 import bcrypt from "bcrypt";
 
+
+
 const login = async (credentials) => {
   try {
     connectToDB();
-    const user = await User.findOne({ username: credentials.username });
+    const user = await User.findOne({ email: credentials.email });
+    console.log(user);
 
-    if (!user || !user.isAdmin) throw new Error("Wrong credentials!");
+    if (!user) throw new Error("Wrong credentials!");
 
     const isPasswordCorrect = await bcrypt.compare(
       credentials.password,

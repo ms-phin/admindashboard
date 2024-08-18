@@ -4,7 +4,6 @@ import { User } from "../models";
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 
-
 export async function GET(request) {
   try {
     await connectToDB();
@@ -20,7 +19,7 @@ export async function GET(request) {
     }
 
     // Debugging: Log the books retrieved
-    console.log("Books retrieved:", books);
+    // console.log("Books retrieved:", books);
 
     // Check if the books array is empty or undefined
     if (!books || books.length === 0) {
@@ -86,7 +85,7 @@ export async function POST(request) {
 
     // Save the book data to the database
     const newBook = await Book.create(bookData);
-    console.log("BOOK SAVED", newBook);
+    // console.log("BOOK SAVED", newBook);
     // Ensure the user.books is an array
     if (!Array.isArray(user.books)) {
       user.books = [];
@@ -106,22 +105,18 @@ export async function POST(request) {
   }
 }
 
-
-
-
-
-// export async function GET(request) {
-//   try {
-//     await connectToDB();
-//     console.log("Connected to the database");
-//     const books = await Book.find({});
-//     return NextResponse.json({ books });
-//   } catch (error) {
-//     console.error("Error fetching books:", error);
-//     return NextResponse.json({
-//       success: false,
-//       msg: "Failed to fetch books",
-//       error,
-//     });
-//   }
-// }
+export async function PUT(request, response) {
+  try {
+    const { _id, isActive } = await request.json();
+    await connectToDB();
+    await Book.updateOne({ _id }, { isActive });
+    return NextResponse.json({ success: true, msg: "User status updated" });
+  } catch (error) {
+    console.error("Error updating user status:", error);
+    return NextResponse.json({
+      success: false,
+      msg: "Failed to update user status",
+      error,
+    });
+  }
+}
