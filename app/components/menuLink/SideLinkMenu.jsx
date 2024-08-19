@@ -9,14 +9,15 @@ import { usePathname } from "next/navigation";
 
 const MenuLink = ({ label, route, imgURL, isUser }) => {
   const pathname = usePathname();
-  const isActive =
-    pathname === route ||
-    (isUser
-      ? pathname.startsWith(`${route}/`)
-      : pathname.startsWith(`${route}/admin-dashboard/`));
-
   // const isActive =
-  //   pathname === route || pathname.startsWith(`${route}/admin-dashboard/`);
+  //   pathname === route ||
+  //   (isUser
+  //     ? pathname.startsWith(`${route}/`)
+  //     : pathname.startsWith(`${route}/admin-dashboard/`));
+  console.log("pathname", pathname);
+  console.log("route", route);
+
+  const isActive = pathname === route || pathname.startsWith(`${route}/`);
   return (
     <Link
       href={route}
