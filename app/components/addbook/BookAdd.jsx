@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 /* CSS to move the Swal popup to the right */
 
-const BookAdd = ({ email }) => {
+const BookAdd = ({ email, isAdmin }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -92,7 +92,10 @@ const BookAdd = ({ email }) => {
   return (
     <section className="relative flex flex-col overflow-scroll scroll-m-0">
       <div className="sticky top-0 bg-white rounded-[20px] p-3">
-        <h1 className="text-20 font-semibold ml-[49px]">Owner/Book Upload</h1>
+        <h1 className="text-20 font-semibold ml-[49px]">
+          {" "}
+          {isAdmin ? "Admin/DashBoard" : "Owner/Book Upload"}
+        </h1>
       </div>
       <form
         onSubmit={handleSubmit}
@@ -112,8 +115,8 @@ const BookAdd = ({ email }) => {
             </button>
           </div>
         </div>
-        <div className="flex w-[500px] h-12 mx-auto gap-3">
-          <div className="mt-10 p-0 flex-1 h-full bg-white flex items-center justify-center rounded-[30px] border-[2.2px]">
+        <div className="flex w-[500px] h-12 mx-auto gap-5">
+          <div className="mt-5 p-0 flex-1 h-full bg-white flex items-center justify-center rounded-[30px] border-[2.2px]">
             <div className="relative">
               <select
                 type="number"
@@ -130,16 +133,16 @@ const BookAdd = ({ email }) => {
               </select>
             </div>
           </div>
-          <div className="mt-10 h-full flex-1 border-[2.2px] rounded-[20px]">
-            <input
-              name="price"
-              onChange={handleBookDetailsChange}
-              value={bookDetails.price}
-              className="mt-[2px] p-4 mb-[2px] bg-transparent text-gray-400 block w-full border-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-full"
-              type="number"
-              placeholder="Rent Price for weeks"
-            />
-          </div>
+          {/* <div className="mt-10 h-full  flex-1 border-[2.2px] rounded-[20px]"> */}
+          <input
+            name="price"
+            onChange={handleBookDetailsChange}
+            value={bookDetails.price}
+            className="mt-[22px] mb-[3px] w-[230px] bg-transparent text-gray-400 block l border-[2.2px] rounded-[20px]  pl-5 sm:text-sm h-full"
+            type="number"
+            placeholder="Rent Price for weeks"
+          />
+          {/* </div> */}
         </div>
         <div className="flex flex-col pt-10">
           <label htmlFor="image">

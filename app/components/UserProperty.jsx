@@ -52,19 +52,45 @@ const User = ({ isAdmin }) => {
               <tbody className="h-[250px] w-[332px]">
                 {data.map((book, index) => (
                   <tr key={book._id} className="border-b  border-gray-200 ">
-                    <td className="px-4 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
+                    <td className="px-2 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
                       {index + 1}
                     </td>
-                    <td className="px-4 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
-                      {book._id}
+                    <td className="px-2 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
+                      {book._id.slice(-4)}
                     </td>
-                    <td className="px-4 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
+                    <td className="px-2 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
                       {user.find((u) => u._id === book.user)?.email || "N/A"}
                     </td>
-                    <td className="px-4 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
-                      {book.isActive ? "Active" : "Inactive"}
+                    <td className="px-2 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
+                      {book.isActive ? (
+                        <div className="flex flex-row gap-2 items-center">
+                          <div className="relative w-4 h-4 bg-[#00ABFF] rounded-full">
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="w-3 h-3 bg-white rounded-full">
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <div className="w-2 h-2 bg-[#00ABFF] rounded-full"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <p>rented</p>
+                        </div>
+                      ) : (
+                        <div className=" relative flex flex-row gap-3 items-center">
+                          <div className="relative w-4 h-4 bg-red-600 rounded-full">
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="w-3 h-3 bg-white rounded-full">
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <p>free</p>
+                        </div>
+                      )}
                     </td>
-                    <td className="px-4 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
+                    <td className="px-2 py-0 text-left font-inter text-[16px] font-light leading-[19.36px]">
                       {book.price}
                     </td>
                   </tr>

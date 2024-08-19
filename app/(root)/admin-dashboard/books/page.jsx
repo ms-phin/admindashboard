@@ -5,10 +5,11 @@ const page = async () => {
   try {
     const { user } = await auth();
     const email = user?.email;
+    const isAdmin = user?.isAdmin;
 
     return (
       <section className=" h-full w-full">
-        <AddBook email={email} />
+        <AddBook email={email} isAdmin={isAdmin} />
       </section>
     );
   } catch (err) {
