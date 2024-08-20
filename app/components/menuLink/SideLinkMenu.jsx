@@ -14,8 +14,8 @@ const MenuLink = ({ label, route, imgURL, isUser }) => {
   //   (isUser
   //     ? pathname.startsWith(`${route}/`)
   //     : pathname.startsWith(`${route}/admin-dashboard/`));
-  console.log("pathname", pathname);
-  console.log("route", route);
+  // console.log("pathname", pathname);
+  // console.log("route", route);
 
   const isActive = pathname === route || pathname.startsWith(`${route}/`);
   return (

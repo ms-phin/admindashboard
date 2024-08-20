@@ -1,13 +1,10 @@
 import { auth } from "@/app/auth";
 import Image from "next/image";
-// import styles from "./transactions.module.css";
 import UserProperty from "../../components/UserProperty";
 
 const AdminDashboard = async () => {
   const { user } = await auth();
-  // console.log("let us check i am sidebar or not", user);
   const isAdmin = user?.isAdmin;
-
   return (
     <section className="relative flex flex-col">
       <div className="bg-white rounded-[20px] p-3">

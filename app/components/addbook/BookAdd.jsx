@@ -5,14 +5,17 @@ import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { app } from "../../../firebase/firebaseConfig";
+import { nullable } from "zod";
+const storage = getStorage(app);
 /* CSS to move the Swal popup to the right */
 
 const BookAdd = ({ email, isAdmin }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState(null);
 
   const [bookDetails, setBookDetails] = useState({
     title: "",
@@ -72,9 +75,19 @@ const BookAdd = ({ email, isAdmin }) => {
     console.log("Book Details:", bookDetails);
   };
 
-  // Handler for file input
   const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const fileRef = ref(storage, selectedFile.name); // Use the imported storage
+      uploadBytes(fileRef, selectedFile).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((downloadUrl) => {
+          console.log(downloadUrl);
+          setImage(downloadUrl);
+        });
+      });
+    } else {
+      console.log("No file is Selected");
+    }
   };
 
   // Handler for closing modal
@@ -88,6 +101,7 @@ const BookAdd = ({ email, isAdmin }) => {
 
     handleCloseModal();
   };
+  console.log("image", image);
 
   return (
     <section className="relative flex flex-col overflow-scroll scroll-m-0">
@@ -99,7 +113,7 @@ const BookAdd = ({ email, isAdmin }) => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="mt-12 flex w-full h-[calc(100vh-150px)] flex-col bg-white"
+        className="mt-12 flex w-full h-[calc(100vh-250px)] flex-col bg-white"
       >
         <div className="flex flex-col gap-[30px] border-b border-black-5 pd-10">
           <div className="flex flex-col gap-2.5 mt-10 w-full justify-center">
@@ -171,7 +185,7 @@ const BookAdd = ({ email, isAdmin }) => {
           {image && (
             <div className="flex-center w-full">
               <Image
-                src={URL.createObjectURL(image)}
+                src={image}
                 width={200}
                 height={70}
                 className="mt-5"

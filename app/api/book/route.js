@@ -2,7 +2,13 @@ import { connectToDB } from "../utils";
 import { Book } from "../models";
 import { User } from "../models";
 import { NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
+import formidable from "formidable";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export async function GET(request) {
   try {
@@ -47,6 +53,78 @@ export async function GET(request) {
   }
 }
 
+// export async function POST(request) {
+//   try {
+//     await connectToDB();
+
+//     const form = formidable();
+
+//     const parseForm = () => {
+//       return new Promise((resolve, reject) => {
+//         form.parse(request, (err, fields, files) => {
+//           if (err) reject(err);
+//           resolve({ fields, files });
+//         });
+//       });
+//     };
+
+//     const { fields } = await parseForm();
+
+//     const { email, title, author, category, quantity, price, imageUrl } =
+//       fields;
+
+//     if (!email || !title || !author || !category || !quantity || !price) {
+//       return NextResponse.json(
+//         {
+//           success: false,
+//           msg: "Missing required fields",
+//         },
+//         { status: 400 }
+//       );
+//     }
+
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       return NextResponse.json(
+//         {
+//           success: false,
+//           msg: "User not found",
+//         },
+//         { status: 404 }
+//       );
+//     }
+
+//     const newBook = await Book.create({
+//       title,
+//       author,
+//       category,
+//       quantity,
+//       price,
+//       imageUrl,
+//       user: user._id,
+//     });
+
+//     user.books.push(newBook._id);
+//     await user.save();
+
+//     return NextResponse.json({
+//       success: true,
+//       msg: "Book Added",
+//       book: newBook,
+//     });
+//   } catch (error) {
+//     console.error("Error saving book:", error);
+//     return NextResponse.json(
+//       {
+//         success: false,
+//         msg: "Failed to add book",
+//         error: error.message,
+//       },
+//       { status: 500 }
+//     );
+//   }
+// }
+
 export async function POST(request) {
   try {
     // Connect to the database
@@ -59,27 +137,13 @@ export async function POST(request) {
     console.log(user);
     console.log("user", user._id);
 
-    const image = formData.get("image");
-    if (!image) {
-      console.error("No image found in form data");
-      return NextResponse.json({ success: false, msg: "No image selected" });
-    }
-    const timestamp = Date.now();
-    const imageByteData = await image.arrayBuffer();
-    const buffer = Buffer.from(imageByteData);
-    const path = `./public/${timestamp}_${image.name}`;
-    await writeFile(path, buffer);
-    const imgUrl = `/${timestamp}_${image.name}`;
-
-    // Retrieve and prepare book data
-    // Retrieve and prepare book data
     const bookData = {
       title: formData.get("title"),
       author: formData.get("author"),
       category: formData.get("category"),
       quantity: parseInt(formData.get("quantity"), 10),
       price: parseFloat(formData.get("price")),
-      imageUrl: imgUrl,
+      imageUrl: formData.get("image"),
       user: user._id,
     };
 
@@ -94,7 +158,7 @@ export async function POST(request) {
     user.book.push(newBook._id);
     await user.save();
     // Return a success response
-    return NextResponse.json({ success: true, msg: "Book Added", imgUrl });
+    return NextResponse.json({ success: true, msg: "Book Added" });
   } catch (error) {
     console.error("Error saving book:", error);
     return NextResponse.json({
