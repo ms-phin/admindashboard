@@ -23,9 +23,9 @@ const MenuLink = ({ label, route, imgURL, isUser }) => {
       href={route}
       key={label}
       className={cn(
-        "flex gap-3 items-center p-[10px]  max-lg:px-4 justify-center lg:justify-start lg:ml-[24px]",
+        "flex gap-3 items-center p-[10px]  max-lg:px-4  lg:justify-start md:ml-[24px]",
         {
-          "bg-[#00ABFF] w-[230px] h-[44px] rounded-[5px] ": isActive,
+          "bg-[#00ABFF]  w-[230px] h-[44px] rounded-[5px] ": isActive,
         }
       )}
     >

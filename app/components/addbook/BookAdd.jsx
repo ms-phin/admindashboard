@@ -113,7 +113,7 @@ const BookAdd = ({ email, isAdmin }) => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="mt-12 flex w-full h-[calc(100vh-250px)] flex-col bg-white"
+        className="mt-12 flex w-full h-auto  flex-col bg-white"
       >
         <div className="flex flex-col gap-[30px] border-b border-black-5 pd-10">
           <div className="flex flex-col gap-2.5 mt-10 w-full justify-center">
@@ -123,7 +123,7 @@ const BookAdd = ({ email, isAdmin }) => {
             <button
               type="button"
               onClick={() => setShowModal(true)}
-              className="mt-10 w-[140px] ml-[420px] text-center bg-white text-16 py-4 font-extrabold text-[#00ABFF] px-4 hover:bg-blue-700 hover:text-white rounded-[20px] transition-all duration-500"
+              className="mt-10 w-[140px] mx-auto text-center bg-white text-16 py-4 font-extrabold text-[#00ABFF] px-4 hover:bg-blue-700 hover:text-white rounded-[20px] transition-all duration-500"
             >
               Add Book
             </button>
@@ -193,7 +193,7 @@ const BookAdd = ({ email, isAdmin }) => {
               />
             </div>
           )}
-          <div className="mt-4 w-full flex justify-center">
+          <div className="mt-4 mb-4 w-full flex justify-center">
             <button
               type="submit"
               className="text-16 w-fit px-[117px] bg-[#00ABFF] py-4 font-extrabold text-white hover:bg-blue-700 hover:text-white transition-all duration-500 rounded-[30px]"
